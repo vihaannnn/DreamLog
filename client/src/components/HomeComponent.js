@@ -7,7 +7,7 @@ function Home()
     <div className="container text-white">
       <div className = "row">
         <div className = "col-12 col-sm-4">
-          <img src = 'assets/images/record.png' alt = "Recall, Record, Analyse" class = "img-fluid"/>
+          <img src = 'assets/images/record.png' alt = "Recall, Record, Analyse" className = "img-fluid"/>
           &nbsp;
         </div>
         <div className = "col-12 col-sm">

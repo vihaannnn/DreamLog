@@ -15,13 +15,19 @@ class Header extends Component {
         this.toggleSignUp = this.toggleSignUp.bind(this);
         this.handleLogin = this.handleLogin.bind(this);
         this.handleSignUp = this.handleSignUp.bind(this);
+        this.handleRegisterEmailChange = this.handleRegisterEmailChange.bind(this);
         this.handleRegisterUsernameChange = this.handleRegisterUsernameChange.bind(this);
+        this.handleRegisterFirstNameChange = this.handleRegisterFirstNameChange.bind(this);
+        this.handleRegisterLastNameChange = this.handleRegisterLastNameChange.bind(this);
         this.handleRegisterPasswordChange = this.handleRegisterPasswordChange.bind(this);
         this.register = this.register.bind(this);
         this.state = {
           isNavOpen: false,
           isLoginOpen: false,
+          registerEmail: "",
           registerUsername: "",
+          registerFirstName: "",
+          registerLastName: "",
           registerPassword: "",
           loginUsername: "",
           loginPassword: "",
@@ -67,7 +73,15 @@ class Header extends Component {
         event.preventDefault();
       }
 
-      //Handling functions
+      //Handling functions for Sign up
+      
+      handleRegisterEmailChange(e) {
+        const newValue = e.target.value
+        this.setState({
+            registerEmail: newValue
+        });
+     }
+      
       handleRegisterUsernameChange(e) {
         //console.log(e.target.value);
         const newValue = e.target.value
@@ -77,6 +91,20 @@ class Header extends Component {
         });
         setTimeout(() => { console.log(this.state.registerUsername); }, 300);
      }
+
+      handleRegisterFirstNameChange(e) {
+        const newValue = e.target.value
+        this.setState({
+            registerFirstName: newValue
+        });
+    }
+
+      handleRegisterLastNameChange(e) {
+        const newValue = e.target.value
+        this.setState({
+            registerLastName: newValue
+        });
+    }
       
      
         handleRegisterPasswordChange(e) {
@@ -88,12 +116,8 @@ class Header extends Component {
             setTimeout(() => { console.log(this.state.registerPassword); }, 300);
      }
 
-
-
-
-
      register(e) {
-        console.log(this.registerUsername)
+        console.log(this.state.registerUsername)
         Axios({
           method: "POST",
           data: {
@@ -126,13 +150,19 @@ class Header extends Component {
 
         if (localStorage.getItem('user')) {
             this.setState({
-                registerUsername: this.userData.registerUsername,
-                registerPassword: this.userData.registerPassword
+              registerEmail: this.userData.registerEmail,
+              registerUsername: this.userData.registerUsername,
+              registerFirstName: this.userData.registerFirstName,
+              registerLastName: this.userData.registerLastName,
+              registerPassword: this.userData.registerPassword
             })
         } else {
             this.setState({
+                registerEmail:"",
                 registerUsername: "",
-                registerPassword: ""
+                registerPassword: "",
+                registerFirstName: "",
+                registerLastName: ""
             })
         }
     }
@@ -225,26 +255,23 @@ class Header extends Component {
                   <Form onSubmit={this.register}>
                         <FormGroup>
                             <Label htmlFor="email">Email ID</Label>
-                            <Input type="email" id="email" name="email"
-                                innerRef={(input) => this.email = input} />
+                            <Input type="email" name="email" value={this.state.registerEmail} className="form-control" onChange={this.handleRegisterEmailChange} />
                         </FormGroup>
                         <FormGroup>
                             <Label htmlFor="username">Username</Label>
-                            <input type="text" name="username" value={this.state.registerUsername} className="form-control" onChange={this.handleRegisterUsernameChange} />
+                            <Input type="text" name="username" value={this.state.registerUsername} className="form-control" onChange={this.handleRegisterUsernameChange} />
                         </FormGroup>
                         <FormGroup>
                             <Label htmlFor="firstname">Firstname</Label>
-                            <Input type="text" id="firstname" name="firstname"
-                                innerRef={(input) => this.firstname = input} />
+                            <Input type="text" name="firstname" value={this.state.registerFirstName} className="form-control" onChange={this.handleRegisterFirstNameChange} />
                         </FormGroup>
                         <FormGroup>
                             <Label htmlFor="lastname">Lastname</Label>
-                            <Input type="text" id="lastname" name="lastname"
-                                innerRef={(input) => this.lastname = input} />
+                            <Input type="text" name="firstname" value={this.state.registerLastName} className="form-control" onChange={this.handleRegisterLastNameChange} />
                         </FormGroup>
                         <FormGroup>
                             <Label htmlFor="password">Password</Label>
-                            <input type="password" name="password" value={this.state.registerPassword} className="form-control" onChange={this.handleRegisterPasswordChange.bind(this)} />
+                            <Input type="password" name="password" value={this.state.registerPassword} className="form-control" onChange={this.handleRegisterPasswordChange} />
                         </FormGroup>
                         <FormGroup check>
                             <Label check>
@@ -253,7 +280,7 @@ class Header extends Component {
                                 Remember me
                             </Label>
                         </FormGroup>
-                        <Button type="submit" value="submit" color="primary">Login</Button>
+                        <Button type="submit" value="submit" color="primary">Sign Up</Button>
                     </Form>
                   </ModalBody>
               </Modal>
