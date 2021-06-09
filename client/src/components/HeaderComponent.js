@@ -97,8 +97,8 @@ class Header extends Component {
         Axios({
           method: "POST",
           data: {
-            username: this.registerUsername, 
-            password: this.registerPassword
+            username: this.state.registerUsername, 
+            password: this.state.registerPassword
           },
           withCredentials: true,
           url: "http://localhost:4000/register"
@@ -131,8 +131,8 @@ class Header extends Component {
             })
         } else {
             this.setState({
-                registerUsername: '',
-                registerPassword: ''
+                registerUsername: "",
+                registerPassword: ""
             })
         }
     }
@@ -187,7 +187,7 @@ class Header extends Component {
                                 <p>LOG YOUR DREAMS AND ANALYSE THEM TOO</p>
                             </div>
                             <div className="col-12 col-sm-6">
-                                <img src = 'assets/images/logo.png' alt = "logo" class = "img-fluid"/>
+                                <img src = 'assets/images/logo.png' alt = "logo" className = "img-fluid"/>
                             </div>
                         </div>
                     </div>
