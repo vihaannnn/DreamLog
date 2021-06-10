@@ -20,7 +20,11 @@ class Header extends Component {
         this.handleRegisterFirstNameChange = this.handleRegisterFirstNameChange.bind(this);
         this.handleRegisterLastNameChange = this.handleRegisterLastNameChange.bind(this);
         this.handleRegisterPasswordChange = this.handleRegisterPasswordChange.bind(this);
+        this.handleLoginUsernameChange = this.handleLoginUsernameChange.bind(this);
+        this.handleLoginPasswordChange = this.handleLoginPasswordChange.bind(this);
         this.register = this.register.bind(this);
+        this.login = this.login.bind(this);
+        this.getUser = this.getUser.bind(this);
         this.state = {
           isNavOpen: false,
           isLoginOpen: false,
@@ -116,6 +120,20 @@ class Header extends Component {
             setTimeout(() => { console.log(this.state.registerPassword); }, 300);
      }
 
+          handleLoginUsernameChange(e) {
+            const newValue = e.target.value
+            this.setState({
+                loginUsername: newValue
+            });
+      }
+
+          handleLoginPasswordChange(e) {
+            const newValue = e.target.value
+            this.setState({
+                loginPassword: newValue
+            });
+      }
+
      register(e) {
         console.log(this.state.registerUsername)
         Axios({
@@ -133,18 +151,28 @@ class Header extends Component {
       login (){
           console.log()
         Axios({
-            
           method: "POST",
           data: {
-            username: this.loginUsername, 
-            password: this.loginPassword
+            username: this.state.loginUsername, 
+            password: this.state.loginPassword
           },
           withCredentials: true,
           url: "http://localhost:4000/login"
         }).then((res) => console.log(res));
+        this.getUser();
       };
 
-
+      getUser() {
+        Axios({
+          method: "GET",
+          withCredentials: true,
+          url: "http://localhost:4000/user"
+        }).then((res) => {
+          this.setData(res.data);
+          console.log(res);
+        });
+        console.log(this.data.username);
+      };
       componentDidMount() {
         this.userData = JSON.parse(localStorage.getItem('user'));
 
@@ -225,16 +253,14 @@ class Header extends Component {
                 <Modal isOpen={this.state.isLoginOpen} toggle={this.toggleLogin}>
                    <ModalHeader toggle={this.toggleLogin}>Login</ModalHeader>
                    <ModalBody>
-                   <Form onSubmit={this.handleLogin}>
+                   <Form onSubmit={this.login}>
                          <FormGroup>
                              <Label htmlFor="username">Username</Label>
-                             <Input type="text" id="username" name="username"
-                                 innerRef={(input) => this.username = input} />
+                             <Input type="text" name="username" value={this.state.loginUsername} className="form-control" onChange={this.handleLoginUsernameChange} />
                          </FormGroup>
                          <FormGroup>
                              <Label htmlFor="password">Password</Label>
-                             <Input type="password" id="password" name="password"
-                                 innerRef={(input) => this.password = input}  />
+                             <Input type="password" name="password" value={this.state.loginPassword} className="form-control" onChange={this.handleLoginPasswordChange} />
                          </FormGroup>
                          <FormGroup check>
                              <Label check>
