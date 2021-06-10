@@ -135,11 +135,13 @@ class Header extends Component {
       }
 
      register(e) {
-        console.log(this.state.registerUsername)
         Axios({
           method: "POST",
           data: {
-            username: this.state.registerUsername, 
+            email: this.state.registerEmail,
+            username: this.state.registerUsername,
+            firstname: this.state.registerFirstName,
+            lastname: this.state.registerLastName, 
             password: this.state.registerPassword
           },
           withCredentials: true,
@@ -171,7 +173,6 @@ class Header extends Component {
           this.setData(res.data);
           console.log(res);
         });
-        console.log(this.data.username);
       };
       componentDidMount() {
         this.userData = JSON.parse(localStorage.getItem('user'));
