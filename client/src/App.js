@@ -2,6 +2,8 @@ import React, { Component } from 'react';
 import Main from './components/MainComponent';
 import './App.css';
 import { BrowserRouter } from 'react-router-dom';
+import { Switch, Route, Redirect} from 'react-router-dom';
+import UserMain from './components/UserMainComponent';
 
 class App extends Component
 {
@@ -11,6 +13,7 @@ class App extends Component
       <BrowserRouter>
         <div className="App">
           <Main />
+         
         </div>
       </BrowserRouter>
     );

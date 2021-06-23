@@ -18,7 +18,7 @@ function Home()
           <h5> Step 3: Click on "Analyse Dream" to generate a comprehensive report of the insights of your dreams </h5>
           <h5> Step 4: Click on "Generate a PDF" </h5>
           <h5> Step 5: Check your email for a comprehensive report of your dreams</h5>
-          <h5> Step 6: Repeat th process </h5>
+          <h5> Step 6: Repeat the process </h5>
           &nbsp;
         </div>
       </div>
