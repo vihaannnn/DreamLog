@@ -1,9 +1,9 @@
 import React, { Component } from 'react';
 import Home from './HomeComponent';
-import Contact from './ContactUsComponent';
+import Contact from './ContactComponent';
 import About from './AboutUsComponent';
 import Header from './HeaderComponent';
-import LoginHeader from './LoginHeaderComponent';
+import UserMain from './UserMainComponent';
 import Footer from './FooterComponent.js'
 import { Switch, Route, Redirect} from 'react-router-dom';
 
@@ -18,6 +18,7 @@ class Main extends Component
             <Route path = '/home' component={() => <Home />} />
             <Route path = '/aboutus' component = {() => <About />} />
             <Route path = '/contactus' component = {() => <Contact />} /> 
+            <Route path = '/usermain' component = {() => <UserMain />} />
             <Redirect to="/home" />
           </Switch>
         </div>

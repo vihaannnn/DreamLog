@@ -63,18 +63,20 @@ class Header extends Component {
 
       handleLogin(event)
       {
+        event.preventDefault();
         this.toggleLogin();
         alert("Username: " + this.username.value + " Password: " + this.password.value
             + " Remember: " + this.remember.checked);
-        event.preventDefault();
+        
       }
 
       handleSignUp(event)
       {
+        event.preventDefault();
         this.toggleSignUp();
         alert("Username: " + this.username.value + " Password: " + this.password.value + " Email ID: " + this.email.value
             + " Firstname: " + this.firstname.value + " Lastname: " + this.lastname.value + " Remember: " + this.remember.checked);
-        event.preventDefault();
+        
       }
 
       //Handling functions for Sign up
@@ -135,6 +137,7 @@ class Header extends Component {
       }
 
      register(e) {
+      e.preventDefault();
         Axios({
           method: "POST",
           data: {
@@ -150,7 +153,8 @@ class Header extends Component {
         
       }
 
-      login (){
+      login(e){
+        e.preventDefault();
           console.log()
         Axios({
           method: "POST",
@@ -294,7 +298,7 @@ class Header extends Component {
                         </FormGroup>
                         <FormGroup>
                             <Label htmlFor="lastname">Lastname</Label>
-                            <Input type="text" name="firstname" value={this.state.registerLastName} className="form-control" onChange={this.handleRegisterLastNameChange} />
+                            <Input type="text" name="lastname" value={this.state.registerLastName} className="form-control" onChange={this.handleRegisterLastNameChange} />
                         </FormGroup>
                         <FormGroup>
                             <Label htmlFor="password">Password</Label>

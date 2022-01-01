@@ -8,6 +8,7 @@ const bcrypt = require("bcryptjs");
 const session = require("express-session");
 const bodyParser = require("body-parser");
 const User = require('./user');
+const Query = require('./query')
 const app = express();
 const url = 'mongodb://127.0.0.1:27017/DreamLog';
 //end of imports
@@ -84,6 +85,21 @@ app.post("/register", (req,res) => {
 });
 app.get("/user", (req,res) => {
     res.send(req.user); 
+});
+
+app.post("/queryFile", (req,res) => {
+    var myData = new Query(req.body);
+  myData.save()
+    .then(item => {
+      res.send("item saved to database");
+    })
+    .catch(err => {
+      res.status(400).send("unable to save to database");
+    });
+
+
+
+
 });
 //end of routes
 
