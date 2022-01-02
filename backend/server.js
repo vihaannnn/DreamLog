@@ -63,6 +63,10 @@ app.post("/login", (req,res, next) => {
     })(req, res, next);
 });
 
+app.get("/user", (req,res) => {
+    res.send(req.user); 
+    
+});
 
 app.post("/register", (req,res) => {
     console.log(req.body.password)
@@ -83,9 +87,7 @@ app.post("/register", (req,res) => {
         }
     })
 });
-app.get("/user", (req,res) => {
-    res.send(req.user); 
-});
+
 
 app.post("/queryFile", (req,res) => {
     var myData = new Query(req.body);

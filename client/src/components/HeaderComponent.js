@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { Component,  useState } from 'react';
 import { Navbar, NavbarBrand, Nav, NavbarToggler, Collapse, NavItem, Jumbotron, Button, Modal, ModalHeader, ModalBody, Form, FormGroup, Input, Label } from 'reactstrap';
 import { NavLink} from 'react-router-dom';
 import Axios from "axios";
@@ -165,7 +165,7 @@ class Header extends Component {
           withCredentials: true,
           url: "http://localhost:4000/login"
         }).then((res) => console.log(res));
-        this.getUser();
+        //this.getUser();
       };
 
       getUser() {
@@ -173,11 +173,13 @@ class Header extends Component {
           method: "GET",
           withCredentials: true,
           url: "http://localhost:4000/user"
-        }).then((res) => {
-          this.setData(res.data);
-          console.log(res);
+        }).then((result) => {
+          this.setData(result.data);
+          console.log(this.data.username);
         });
-      };
+      }; 
+
+      
       componentDidMount() {
         this.userData = JSON.parse(localStorage.getItem('user'));
 
